@@ -27,3 +27,9 @@ class Inventory(models.Model):
 
     def __str__(self):
         return f'inventory {self.user.username}'
+
+    def add_item(self, item):
+        self.inventory_items.add(item)
+
+    def remove_item(self, item):
+        self.inventory_items.remove(item)
