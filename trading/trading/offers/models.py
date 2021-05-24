@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.conf import settings
 
@@ -17,6 +18,8 @@ class PurchaseOffer(models.Model):
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     status = models.CharField(max_length=7, choices=STATUSES)
+
+    datetime_created = models.DateTimeField(auto_now_add=True)
     
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -29,11 +32,12 @@ class PurchaseOffer(models.Model):
 
 class SaleOffer(models.Model):
     inventory_item = models.ForeignKey(InventoryItem, on_delete=models.CASCADE)
-    suitable_offers = models.ForeignKey(PurchaseOffer, on_delete=models.CASCADE, blank=True)
+    suitable_offers = models.ManyToManyField(PurchaseOffer, blank=True)
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     status = models.CharField(max_length=7, choices=STATUSES)
 
+    datetime_created = models.DateTimeField(auto_now_add=True)
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
