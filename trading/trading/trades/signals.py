@@ -27,3 +27,5 @@ def perform_trade_presave(sender, instance, **kwargs):
     instance.sale_quantity_before_trade = sale_quantity_before_trade
     instance.sale_quantity_after_trade = sale_quantity_after_trade
 
+    instance.status = 'closed'
+
