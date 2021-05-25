@@ -8,7 +8,7 @@ docs/
 
 # C extensions
 *.so
-
+.envs/
 # Distribution / packaging
 .Python
 build/
