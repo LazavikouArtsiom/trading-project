@@ -4,7 +4,7 @@ from django.db import models
 
 class Account(models.Model):
 
-    money = models.PositiveIntegerField()
+    money = models.PositiveIntegerField(default=0)
 
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
@@ -16,6 +16,8 @@ class Account(models.Model):
 
     def add_money(self, money):
         self.money += money
+        self.save()
 
     def remove_money(self, money):
         self.money -= money
+        self.save()

@@ -1,12 +1,13 @@
 from django.db import models
 from django.conf import settings
+from django.shortcuts import get_object_or_404
 
 from trading.items.models import Currency
 
 
 class InventoryItem(models.Model):
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(default=0)
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -28,8 +29,13 @@ class Inventory(models.Model):
     def __str__(self):
         return f'inventory {self.user.username}'
 
-    def add_item(self, item):
-        self.inventory_items.add(item)
+    def add_item_quantity(self, currency, quantity, user):
+        
+        item = self.inventory_items.get_or_create(currency=currency, user=user)[0]
+        item.quantity += quantity
+        item.save()
 
-    def remove_item(self, item):
-        self.inventory_items.remove(item)
+    def remove_item_quantity(self, currency, quantity, user):
+        item = get_object_or_404(self.inventory_items, currency=currency, user=user)
+        item.quantity -= quantity
+        item.save()

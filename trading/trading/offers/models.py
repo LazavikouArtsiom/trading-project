@@ -7,20 +7,31 @@ from trading.items.models import Currency
 
 
 STATUSES = (
-        ('opened', "opened"),
-        ('waiting', "waiting"),
-        ('closed', "closed"),
-    )
+    ('opened', "opened"),
+    ('waiting', "waiting"),
+    ('closed', "closed"),
+)
 
 
-class PurchaseOffer(models.Model):
+class Offer:
+
+    def remove_quantity(self, quantity):
+        self.quantity -= quantity
+        self.save()
+
+    def set_status(self, status):
+        self.status = status
+        self.save()
+
+
+class PurchaseOffer(models.Model, Offer):
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     status = models.CharField(max_length=7, choices=STATUSES)
 
     datetime_created = models.DateTimeField(auto_now_add=True)
-    
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -30,7 +41,7 @@ class PurchaseOffer(models.Model):
         return f'Purchase offer {self.currency} {self.quantity} {self.price}'
 
 
-class SaleOffer(models.Model):
+class SaleOffer(models.Model, Offer):
     inventory_item = models.ForeignKey(InventoryItem, on_delete=models.CASCADE)
     suitable_offers = models.ManyToManyField(PurchaseOffer, blank=True)
     quantity = models.PositiveIntegerField()
@@ -46,6 +57,3 @@ class SaleOffer(models.Model):
 
     def __str__(self):
         return f'Sale offer {self.inventory_item.currency} {self.quantity} {self.price}'
-
-
-

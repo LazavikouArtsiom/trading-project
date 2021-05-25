@@ -14,10 +14,10 @@ class Trade(models.Model):
     sale_offer = models.ForeignKey(SaleOffer, on_delete=models.CASCADE)
     purchase_offer = models.ForeignKey(PurchaseOffer, on_delete=models.CASCADE)
 
-    purchase_quantity_before_trade = models.PositiveIntegerField(blank=True)
-    purchase_quantity_after_trade = models.PositiveIntegerField(blank=True)
-    sale_quantity_before_trade = models.PositiveIntegerField(blank=True)
-    sale_quantity_after_trade = models.PositiveIntegerField(blank=True)
+    purchase_quantity_before_trade = models.PositiveIntegerField(blank=True, null=True)
+    purchase_quantity_after_trade = models.PositiveIntegerField(blank=True, null=True)
+    sale_quantity_before_trade = models.PositiveIntegerField(blank=True, null=True)
+    sale_quantity_after_trade = models.PositiveIntegerField(blank=True, null=True)
 
     status = models.CharField(max_length=6, choices=STATUSES)
 
