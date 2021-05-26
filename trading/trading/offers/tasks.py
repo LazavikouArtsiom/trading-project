@@ -1,5 +1,5 @@
 from datetime import datetime
-from re import T
+
 from celery import shared_task
 from django.db import transaction
 
@@ -17,7 +17,6 @@ def perform_trade(id):
     sale_offer = SaleOffer.objects.get(id=id)
     print(len(sale_offer.suitable_offers.all()))
     for suitable_offer in sale_offer.suitable_offers.all():
-        print('PROGON')
         with transaction.atomic():
             if suitable_offer.status == 'opened':
                 trade = Trade.objects.create(sale_offer=sale_offer,

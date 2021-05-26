@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from .models import (SaleOffer,
                      PurchaseOffer,
-                    )
+                     )
 
 
 class PurchaseOfferSerializer(serializers.ModelSerializer):
@@ -32,4 +32,3 @@ class SaleOfferSerializer(serializers.ModelSerializer):
         item_quantity = item.quantity
         if data['quantity'] > item_quantity:
             raise serializers.ValidationError("You haven't enough items")
-
