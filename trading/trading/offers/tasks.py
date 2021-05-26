@@ -1,8 +1,9 @@
 from datetime import datetime
+from re import T
 from celery import shared_task
+from django.db import transaction
 
 from trading.trades.models import Trade
-
 from .models import SaleOffer, PurchaseOffer
 from .selectors import get_sale_offers, get_suitable_offers
 from config.celery import app
@@ -14,16 +15,22 @@ def notify_user(sale_offer, purchase_offer):
 @app.task()
 def perform_trade(id):
     sale_offer = SaleOffer.objects.get(id=id)
+    print(len(sale_offer.suitable_offers.all()))
     for suitable_offer in sale_offer.suitable_offers.all():
-        if suitable_offer.status == 'opened':
-            trade = Trade.objects.create(sale_offer=sale_offer,
-                                  purchase_offer=suitable_offer,
-                                  status='opened')
-            trade.save()
+        print('PROGON')
+        with transaction.atomic():
+            if suitable_offer.status == 'opened':
+                trade = Trade.objects.create(sale_offer=sale_offer,
+                                        purchase_offer=suitable_offer,
+                                        status='opened')
+                trade.save()
+
+        if not sale_offer.quantity:
+            break
+
 
 @shared_task
 def search_offers():
-    print('11')
     sale_offers = get_sale_offers()
 
     for offer in sale_offers:

@@ -315,7 +315,7 @@ CORS_URLS_REGEX = r"^/api/.*$"
 # ------------------------------------------------------------------------------
 
 CELERY_BEAT_SCHEDULE = {
-    "print_something": {
+    "search_offers": {
         "task": "trading.offers.tasks.search_offers",
         "schedule": 60.0
     }

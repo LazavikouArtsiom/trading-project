@@ -12,7 +12,7 @@ class Account(models.Model):
     )
 
     def __str__(self):
-        return f'inventory {self.user.username}'
+        return f'acount {self.user.username} {self.money}'
 
     def add_money(self, money):
         self.money += money

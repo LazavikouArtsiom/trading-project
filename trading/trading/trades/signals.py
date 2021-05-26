@@ -8,24 +8,25 @@ from .services import (calculate_transaction_quantity,
 
 
 def perform_trade_presave(sender, instance, **kwargs):
+    
     from .models import Trade
 
-    sale_offer = instance.sale_offer
-    purchase_offer = instance.purchase_offer
-    
-    sale_quantity_before_trade = sale_offer.quantity
-    purchase_quantity_before_trade = purchase_offer.quantity
-           
-    with transaction.atomic():
-        offers_trade(sale_offer, purchase_offer)
+    if not instance.status == 'closed':
 
-    sale_quantity_after_trade = sale_offer.quantity
-    purchase_quantity_after_trade = purchase_offer.quantity
+        sale_offer = instance.sale_offer
+        purchase_offer = instance.purchase_offer
 
-    instance.purchase_quantity_before_trade = purchase_quantity_before_trade
-    instance.purchase_quantity_after_trade = purchase_quantity_after_trade
-    instance.sale_quantity_before_trade = sale_quantity_before_trade
-    instance.sale_quantity_after_trade = sale_quantity_after_trade
+        sale_quantity_before_trade = sale_offer.quantity
+        purchase_quantity_before_trade = purchase_offer.quantity
+        
+        with transaction.atomic():
+            offers_trade(sale_offer, purchase_offer)
 
-    instance.status = 'closed'
+        sale_quantity_after_trade = sale_offer.quantity
+        purchase_quantity_after_trade = purchase_offer.quantity
 
+        instance.status = 'closed'
+        instance.purchase_quantity_before_trade = purchase_quantity_before_trade
+        instance.sale_quantity_before_trade = sale_quantity_before_trade
+        instance.purchase_quantity_after_trade = purchase_quantity_after_trade
+        instance.sale_quantity_after_trade = sale_quantity_after_trade

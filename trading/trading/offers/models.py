@@ -8,7 +8,6 @@ from trading.items.models import Currency
 
 STATUSES = (
     ('opened', "opened"),
-    ('waiting', "waiting"),
     ('closed', "closed"),
 )
 
@@ -28,7 +27,7 @@ class PurchaseOffer(models.Model, Offer):
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
-    status = models.CharField(max_length=7, choices=STATUSES)
+    status = models.CharField(max_length=7, choices=STATUSES, default='opened')
 
     datetime_created = models.DateTimeField(auto_now_add=True)
 
@@ -38,7 +37,7 @@ class PurchaseOffer(models.Model, Offer):
     )
 
     def __str__(self):
-        return f'Purchase offer {self.currency} {self.quantity} {self.price}'
+        return f'Purchase offer {self.user} {self.currency} {self.quantity} {self.price}'
 
 
 class SaleOffer(models.Model, Offer):
@@ -46,7 +45,7 @@ class SaleOffer(models.Model, Offer):
     suitable_offers = models.ManyToManyField(PurchaseOffer, blank=True)
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
-    status = models.CharField(max_length=7, choices=STATUSES)
+    status = models.CharField(max_length=7, choices=STATUSES, default='opened')
 
     datetime_created = models.DateTimeField(auto_now_add=True)
 
@@ -56,4 +55,4 @@ class SaleOffer(models.Model, Offer):
     )
 
     def __str__(self):
-        return f'Sale offer {self.inventory_item.currency} {self.quantity} {self.price}'
+        return f'Sale offer {self.user} {self.inventory_item.currency} {self.quantity} {self.price}'

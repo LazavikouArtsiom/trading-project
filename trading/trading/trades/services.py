@@ -10,7 +10,7 @@ def calculate_transaction_quantity(sale_offer, purchase_offer):
     return sorted([sale_offer.quantity, purchase_offer.quantity])[0]
 
 
-def calcuclate_money(quantity, price):
+def calcuclate_money(quantity: int, price: int):
     return quantity * price
 
 
@@ -26,6 +26,7 @@ def close_offers(sale_offer, purchase_offer):
 def offers_trade(sale_offer, purchase_offer):
 
     quantity = calculate_transaction_quantity(sale_offer, purchase_offer)
+
     offer_money = calcuclate_money(quantity, purchase_offer.price)
     offer_currency = purchase_offer.currency
 
