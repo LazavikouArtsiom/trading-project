@@ -9,11 +9,11 @@ from .viewsets import (SaleOfferViewSet,
 
 router = routers.SimpleRouter()
 
-router.register(r'offers/sale', SaleOfferViewSet, basename='offers_sale')
+router.register(r'sale', SaleOfferViewSet, basename='offers_sale')
 #offers/sale
 #offers/sale/id/
 #offers/sale/id/buy
-router.register(r'offers/purchase', PurchaseOfferViewSet, basename='offers_purchase')
+router.register(r'purchase', PurchaseOfferViewSet, basename='offers_purchase')
 #offers/purchase
 #offers/purchase/id
 #offers/purchase/id/sale

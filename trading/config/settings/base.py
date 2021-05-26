@@ -75,12 +75,13 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "trading.users.apps.UsersConfig",
     "trading.items.apps.ItemsConfig",
     "trading.trades.apps.TradesConfig",
     "trading.inventories.apps.InventoriesConfig",
     "trading.watchlists.apps.WatchlistsConfig",
     "trading.offers.apps.OffersConfig",
+    "trading.accounts.apps.AccountsConfig",
+    "trading.users.apps.UsersConfig",
 
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -312,3 +313,10 @@ REST_FRAMEWORK = {
 CORS_URLS_REGEX = r"^/api/.*$"
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+CELERY_BEAT_SCHEDULE = {
+    "search_offers": {
+        "task": "trading.offers.tasks.search_offers",
+        "schedule": 60.0
+    }
+}
