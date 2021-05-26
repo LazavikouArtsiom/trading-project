@@ -8,7 +8,7 @@ class InventoryItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = InventoryItem
-        fields = "__all__"
+        fields = ['currency', 'quantity']
 
 
 class InventorySerializer(serializers.ModelSerializer):
@@ -17,6 +17,6 @@ class InventorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Inventory
-        fields = "__all__"
+        fields = ["inventory_items"]
 
 

@@ -9,4 +9,4 @@ class WatchlistRetrieveUpdate(generics.RetrieveUpdateAPIView):
     
     def get_queryset(self):
         user = self.request.user
-        return Watchlist.objects.filter(user=user)
+        return Watchlist.objects.get(user=user)

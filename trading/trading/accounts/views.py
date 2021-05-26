@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework.generics import RetrieveUpdateAPIView
 
-# Create your views here.
+from .models import Account
+from .serializers import AccountSerializer
+
+class AccountRetrieveUpdateAPIView(RetrieveUpdateAPIView):
+    serializer_class = AccountSerializer
+    
+    def get_queryset(self):
+        return Account.objects.get(user=self.request.user)

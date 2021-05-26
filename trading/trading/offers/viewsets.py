@@ -7,33 +7,34 @@ from .models import (SaleOffer,
 from .serializers import (SaleOfferSerializer,
                           PurchaseOfferSerializer,
                           )
+from .selectors import (get_users_purchase_offers,  
+                        get_users_sale_offers,
+                       )
 
 
 class SaleOfferViewSet(viewsets.ModelViewSet):
-    """
-    A viewset for viewing and editing user instances.
-    """
+
     serializer_class = SaleOfferSerializer
     queryset = SaleOffer.objects.all()
 
-    @action(detail=True,
-            methods=['post'],
-            name='subscribe',
-            )
-    def buy(self, request, pk=None):
-        pass
-
 
 class PurchaseOfferViewSet(viewsets.ModelViewSet):
-    """
-    A viewset for viewing and editing user instances.
-    """
+
     serializer_class = PurchaseOfferSerializer
     queryset = PurchaseOffer.objects.all()
 
-    @action(detail=True,
-            methods=['post'],
-            name='subscribe',
-            )
-    def sale(self, request, pk=None):
-        pass
+
+class MySaleOfferViewSet(viewsets.ModelViewSet):
+
+    serializer_class = SaleOfferSerializer
+
+    def get_queryset(self):
+        return get_users_sale_offers(self)
+    
+
+class MyPurchaseOfferViewSet(viewsets.ModelViewSet):
+
+    serializer_class = PurchaseOfferSerializer
+
+    def get_queryset(self):
+        return get_users_purchase_offers(self)

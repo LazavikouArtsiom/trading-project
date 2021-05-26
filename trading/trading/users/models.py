@@ -10,7 +10,6 @@ from .signals import create_related_to_user_models_postsave
 class User(AbstractUser):
     """Default user for trading."""
 
-    #: First and last name do not cover name patterns around the globe
     name = CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore
     last_name = None  # type: ignore
