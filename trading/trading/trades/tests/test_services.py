@@ -44,6 +44,7 @@ class ServicesTest(TestCase):
             inventory_item=self.inventory_item, quantity=0, price=10, user=self.user)
         self.purchase_offer = PurchaseOffer.objects.create(
             currency=self.currency, quantity=5, price=10, user=self.user_1)
+            
 
     def test_calculate_money(self):
         money = calcuclate_money(10, 100)

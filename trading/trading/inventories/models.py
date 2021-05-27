@@ -38,4 +38,3 @@ class Inventory(models.Model):
         item = InventoryItem.objects.get(currency__code=currency, user=user)
         item.quantity -= quantity
         item.save()
-
