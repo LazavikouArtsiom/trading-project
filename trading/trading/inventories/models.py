@@ -30,13 +30,12 @@ class Inventory(models.Model):
         return f'inventory {self.user.username}'
 
     def add_item_quantity(self, currency, quantity, user):
-
         item = InventoryItem.objects.get_or_create(currency=currency, user=user)[0]
         item.quantity += quantity
         item.save()
 
     def remove_item_quantity(self, currency, quantity, user):
-
         item = InventoryItem.objects.get(currency__code=currency, user=user)
         item.quantity -= quantity
         item.save()
+
