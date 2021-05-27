@@ -18,7 +18,7 @@ user_urlpatterns = [
 apipatterns = [
     path("offers/", include(common_offers_urls)),
     path("items/", include("trading.items.urls")),
-    path("my/", include(user_urlpatterns)),
+    path("me/", include(user_urlpatterns)),
 ]
 
 urlpatterns = [

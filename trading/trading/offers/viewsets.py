@@ -9,19 +9,26 @@ from .serializers import (SaleOfferSerializer,
                           )
 from .selectors import (get_users_purchase_offers,  
                         get_users_sale_offers,
+                        get_opened_sale_offers,
+                        get_opened_purchase_offers,
                        )
 
 
 class SaleOfferViewSet(viewsets.ModelViewSet):
 
     serializer_class = SaleOfferSerializer
-    queryset = SaleOffer.objects.all()
+    queryset = SaleOffer.objects.filter()
+
+    def get_queryset(self):
+        return get_opened_sale_offers(self)
 
 
 class PurchaseOfferViewSet(viewsets.ModelViewSet):
 
     serializer_class = PurchaseOfferSerializer
-    queryset = PurchaseOffer.objects.all()
+
+    def get_queryset(self):
+        return get_opened_purchase_offers(self)
 
 
 class MySaleOfferViewSet(viewsets.ModelViewSet):
