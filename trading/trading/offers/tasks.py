@@ -15,17 +15,13 @@ def notify_user(sale_offer, purchase_offer):
 @app.task()
 def perform_trade(id):
     sale_offer = SaleOffer.objects.get(id=id)
-    print(len(sale_offer.suitable_offers.all()))
     for suitable_offer in sale_offer.suitable_offers.all():
         with transaction.atomic():
-            if suitable_offer.status == 'opened':
+            if suitable_offer.status == 'opened' and sale_offer.quantity:
                 trade = Trade.objects.create(sale_offer=sale_offer,
                                         purchase_offer=suitable_offer,
                                         status='opened')
                 trade.save()
-
-        if not sale_offer.quantity:
-            break
 
 
 @shared_task
