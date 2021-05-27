@@ -5,10 +5,9 @@ from rest_framework.routers import SimpleRouter
 
 from .viewsets import TradeReadOnlyViewSet
 
-router = SimpleRouter()
 
+router = SimpleRouter()
 router.register(r'history', TradeReadOnlyViewSet, basename='trade')
 
 urlpatterns = [
-
 ] + router.urls

@@ -28,9 +28,7 @@ class PurchaseOffer(models.Model, Offer):
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     status = models.CharField(max_length=7, choices=STATUSES, default='opened')
-
     datetime_created = models.DateTimeField(auto_now_add=True)
-
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -46,9 +44,7 @@ class SaleOffer(models.Model, Offer):
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     status = models.CharField(max_length=7, choices=STATUSES, default='opened')
-
     datetime_created = models.DateTimeField(auto_now_add=True)
-
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

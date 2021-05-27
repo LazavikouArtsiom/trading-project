@@ -19,7 +19,6 @@ class Trade(models.Model):
     purchase_quantity_after_trade = models.PositiveIntegerField(blank=True, null=True, default=0)
     sale_quantity_before_trade = models.PositiveIntegerField(blank=True, null=True, default=0)
     sale_quantity_after_trade = models.PositiveIntegerField(blank=True, null=True, default=0)
-
     status = models.CharField(max_length=6, choices=STATUSES, default='opened')
 
     def __str__(self):

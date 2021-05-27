@@ -12,7 +12,6 @@ class InventoryItemSerializer(serializers.ModelSerializer):
 
 
 class InventorySerializer(serializers.ModelSerializer):
-
     inventory_items = InventoryItemSerializer(read_only=True, many=True)
 
     class Meta:

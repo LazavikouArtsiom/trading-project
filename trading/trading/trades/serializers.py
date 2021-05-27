@@ -15,7 +15,6 @@ class TradeSerializer(serializers.ModelSerializer):
                   'sale_quantity_after_trade',
                   ]
 
-
     def validate(self, data):
         sale_offer = data['sale_offer'] 
         purchase_offer = data['purchase_offer'] 
