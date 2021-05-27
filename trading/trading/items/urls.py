@@ -5,7 +5,7 @@ from .viewsets import CurrencyReadOnlyViewSet
 
 router = routers.SimpleRouter()
 
-router.register('currencies/')
+router.register('currencies/', CurrencyReadOnlyViewSet, basename='currencies')
 
 urlpatterns = [
 ] + router.urls

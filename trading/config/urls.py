@@ -3,19 +3,27 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+from trading.offers.urls import user_urlpatterns as user_offers_urls
+from trading.offers.urls import urlpatterns as common_offers_urls
+
+
 user_urlpatterns = [
-    path("offers/", include("trading.offers.urls.user_urlpatterns")),
+    path("offers/", include(user_offers_urls)),
     path("inventory/", include("trading.inventories.urls")),
     path("watchlists/", include("trading.watchlists.urls")),
     path("trades/", include("trading.trades.urls")),
     path("account/", include("trading.accounts.urls")),
 ]
 
+apipatterns = [
+    path("offers/", include(common_offers_urls)),
+    path("items/", include("trading.items.urls")),
+    path("my/", include(user_urlpatterns)),
+]
+
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
-    path("offers/", include("trading.offers.urls.urlpatterns")),
-    path("items/", include("trading.items.urls")),
-    path("my/", include("user_urlpatterns")),
+    path('api/', include(apipatterns)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
