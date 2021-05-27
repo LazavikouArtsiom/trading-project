@@ -65,8 +65,8 @@ class ServicesTest(TestCase):
         self.assertEqual(self.user_1.account.money, 950)
         self.assertEqual(self.sale_offer.status, 'opened')
         self.assertEqual(self.purchase_offer.status, 'closed')
-        self.assertEqual(self.purchase_offer.quantity, 0)
         self.assertEqual(self.sale_offer.quantity, 5)
+        self.assertEqual(self.purchase_offer.quantity, 0)
 
         user_inventory_item = self.user.inventory.inventory_items.get(currency=self.currency, user=self.user)
         user_1_inventory_item = self.user_1.inventory.inventory_items.get(currency=self.currency, user=self.user_1)   

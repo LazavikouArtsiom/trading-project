@@ -16,6 +16,7 @@ def close_offers(sale_offer, purchase_offer):
     for offer in [sale_offer, purchase_offer]:
         if offer.quantity == 0:
             offer.set_status('closed')
+            offer.save()
 
 
 def offers_trade(sale_offer, purchase_offer):
