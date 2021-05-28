@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from trading.items.serializers import CurrencySerializer
-from .models import (Inventory, 
+from trading.inventories.models import (Inventory, 
                      InventoryItem,
                     )
 

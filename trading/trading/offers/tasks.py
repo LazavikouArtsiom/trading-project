@@ -4,9 +4,9 @@ from celery import shared_task
 from django.db import transaction
 
 from trading.trades.models import Trade
-from .models import SaleOffer, PurchaseOffer
-from .selectors import get_sale_offers
-from .services import add_suitable_offers_into_field
+from trading.offers.models import SaleOffer, PurchaseOffer
+from trading.offers import selectors
+from trading.offers import services
 from config.celery import app
 
 
@@ -24,10 +24,10 @@ def perform_trade(id):
 
 @shared_task
 def search_offers():
-    sale_offers = get_sale_offers()
+    sale_offers = selectors.get_sale_offers()
 
     for offer in sale_offers:
-        add_suitable_offers_into_field(offer)
+        services.add_suitable_offers_into_field(offer)
 
         perform_trade.delay(offer.id)
     

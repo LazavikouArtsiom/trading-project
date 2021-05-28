@@ -8,8 +8,7 @@ from django.db.models.signals import post_save
 from .signals import create_related_to_user_models_postsave
 
 class User(AbstractUser):
-    """Default user for trading."""
-
+    
     name = CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore
     last_name = None  # type: ignore
@@ -17,12 +16,6 @@ class User(AbstractUser):
     created = models.BooleanField(default=False)
 
     def get_absolute_url(self):
-        """Get url for user's detail view.
-
-        Returns:
-            str: URL for user detail.
-
-        """
         return reverse("users:detail", kwargs={"username": self.username})
 
 post_save.connect(create_related_to_user_models_postsave, sender=User)

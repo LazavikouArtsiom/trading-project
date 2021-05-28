@@ -1,4 +1,4 @@
-from .models import Inventory
+from trading.inventories.models import Inventory
 
 
 def get_user_inventory(self):

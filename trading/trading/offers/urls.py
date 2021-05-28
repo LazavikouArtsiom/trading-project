@@ -3,7 +3,7 @@ from django.urls import path
 from django.conf import settings
 from rest_framework import routers
 
-from .viewsets import (SaleOfferViewSet,
+from trading.offers.viewsets import (SaleOfferViewSet,
                        PurchaseOfferViewSet,
                        MySaleOfferViewSet,
                        MyPurchaseOfferViewSet,
@@ -20,11 +20,6 @@ user_router.register(r'purchase', MyPurchaseOfferViewSet, basename='user_offers_
 user_router.register(r'sale', MySaleOfferViewSet, basename='user_offers_purchase')
 
 
-user_urlpatterns = [
+user_urlpatterns = user_router.urls
 
-] + user_router.urls
-
-
-urlpatterns = [
-
-] + router.urls
+urlpatterns = router.urls

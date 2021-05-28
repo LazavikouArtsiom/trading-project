@@ -1,6 +1,6 @@
 from django.db.models import Q
 
-from .models import Trade
+from trading.trades.models import Trade
 
 
 def get_trades_list(user):

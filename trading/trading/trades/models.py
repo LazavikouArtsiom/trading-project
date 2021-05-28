@@ -1,9 +1,8 @@
-
 from django.db import models
 from django.db.models.signals import pre_save
 
 from trading.offers.models import SaleOffer, PurchaseOffer
-from .signals import perform_trade_presave
+from trading.trades.signals import perform_trade_presave
 
 
 class Trade(models.Model):

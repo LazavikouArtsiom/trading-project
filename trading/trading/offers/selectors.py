@@ -1,4 +1,4 @@
-from .models import SaleOffer, PurchaseOffer
+from trading.offers.models import SaleOffer, PurchaseOffer
 
 
 def get_sale_offers():

@@ -3,8 +3,8 @@ from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 
 from trading.items.models import Currency
-from .models import Watchlist
-from .serializers import WatchlistSerializer
+from trading.watchlists.models import Watchlist
+from trading.watchlists.serializers import WatchlistSerializer
 
 
 class WatchlistRetrieveUpdate(generics.RetrieveUpdateAPIView):
@@ -18,6 +18,3 @@ class WatchlistRetrieveUpdate(generics.RetrieveUpdateAPIView):
         queryset = self.get_queryset()
         data = self.serializer_class(queryset).data
         return Response(data)
-
-    def post(self, request):
-        return Response({'405': 'method not yet implemented'})

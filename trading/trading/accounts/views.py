@@ -1,8 +1,8 @@
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 
-from .models import Account
-from .serializers import AccountSerializer
+from trading.accounts.models import Account
+from trading.accounts.serializers import AccountSerializer
 
 
 class AccountRetrieveUpdateAPIView(RetrieveUpdateAPIView):

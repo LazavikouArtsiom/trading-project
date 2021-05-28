@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import InventoryRetrieve
+from trading.inventories.views import InventoryRetrieve
 
 
 urlpatterns = [

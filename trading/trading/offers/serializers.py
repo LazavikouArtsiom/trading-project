@@ -1,8 +1,6 @@
 from rest_framework import serializers
 
-from .models import (SaleOffer,
-                     PurchaseOffer,
-                     )
+from trading.offers.models import SaleOffer, PurchaseOffer
 
 
 class PurchaseOfferSerializer(serializers.ModelSerializer):

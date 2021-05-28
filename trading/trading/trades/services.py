@@ -10,9 +10,6 @@ def calcuclate_money(quantity: int, price: int):
 
 
 def close_offers(sale_offer, purchase_offer):
-    '''
-    Logic for closing offers after Trade is complete
-    '''
     for offer in [sale_offer, purchase_offer]:
         if offer.quantity == 0:
             offer.set_status('closed')

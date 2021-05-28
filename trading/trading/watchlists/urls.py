@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework import routers
 
-from .views import WatchlistRetrieveUpdate
+from trading.watchlists.views import WatchlistRetrieveUpdate
 
 
 urlpatterns = [

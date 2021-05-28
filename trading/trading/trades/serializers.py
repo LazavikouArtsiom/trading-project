@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
-from .models import (Trade,
-                    )
+from trading.trades.models import Trade
 
 
 class TradeSerializer(serializers.ModelSerializer):

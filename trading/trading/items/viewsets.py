@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from .models import Currency
-from .serializers import CurrencySerializer
+from trading.items.models import Currency
+from trading.items.serializers import CurrencySerializer
 
 
 class CurrencyReadOnlyViewSet(ReadOnlyModelViewSet):
