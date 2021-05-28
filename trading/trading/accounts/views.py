@@ -16,6 +16,3 @@ class AccountRetrieveUpdateAPIView(RetrieveUpdateAPIView):
         data = self.serializer_class(queryset).data
 
         return Response(data)
-    
-    def post(self, request):
-        return Response({'405': 'method not yet implemented'})

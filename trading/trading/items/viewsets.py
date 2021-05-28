@@ -7,4 +7,4 @@ from trading.items.serializers import CurrencySerializer
 class CurrencyReadOnlyViewSet(ReadOnlyModelViewSet):
     model = Currency
     serializer_class = CurrencySerializer
-    
+    queryset = Currency.objects.all()
