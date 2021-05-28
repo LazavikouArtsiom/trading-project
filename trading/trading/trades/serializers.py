@@ -5,7 +5,6 @@ from .models import (Trade,
 
 
 class TradeSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Trade
         fields = ['status', 'sale_offer', 'purchase_offer',

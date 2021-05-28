@@ -5,7 +5,6 @@ from .serializers import CurrencySerializer
 
 
 class CurrencyReadOnlyViewSet(ReadOnlyModelViewSet):
-
     model = Currency
     serializer_class = CurrencySerializer
     

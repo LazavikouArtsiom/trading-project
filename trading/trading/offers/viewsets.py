@@ -15,16 +15,13 @@ from .selectors import (get_users_purchase_offers,
 
 
 class SaleOfferViewSet(viewsets.ModelViewSet):
-
     serializer_class = SaleOfferSerializer
-    queryset = SaleOffer.objects.filter()
 
     def get_queryset(self):
         return get_opened_sale_offers(self)
 
 
 class PurchaseOfferViewSet(viewsets.ModelViewSet):
-
     serializer_class = PurchaseOfferSerializer
 
     def get_queryset(self):
@@ -32,7 +29,6 @@ class PurchaseOfferViewSet(viewsets.ModelViewSet):
 
 
 class MySaleOfferViewSet(viewsets.ModelViewSet):
-
     serializer_class = SaleOfferSerializer
 
     def get_queryset(self):
@@ -40,7 +36,6 @@ class MySaleOfferViewSet(viewsets.ModelViewSet):
     
 
 class MyPurchaseOfferViewSet(viewsets.ModelViewSet):
-
     serializer_class = PurchaseOfferSerializer
 
     def get_queryset(self):
