@@ -1,5 +1,4 @@
-import re
-from rest_framework import generics, serializers
+from rest_framework import generics
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 
@@ -19,6 +18,3 @@ class WatchlistRetrieveUpdate(generics.RetrieveUpdateAPIView):
         queryset = self.get_queryset()
         data = self.serializer_class(queryset).data
         return Response(data)
-
-
-

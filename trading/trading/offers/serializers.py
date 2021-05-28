@@ -6,6 +6,7 @@ from .models import (SaleOffer,
 
 
 class PurchaseOfferSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = PurchaseOffer
         fields = ['currency', 'quantity', 'price',
@@ -20,6 +21,7 @@ class PurchaseOfferSerializer(serializers.ModelSerializer):
 
 
 class SaleOfferSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = SaleOffer
         fields = ['inventory_item', 'suitable_offers',

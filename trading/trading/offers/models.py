@@ -28,7 +28,6 @@ class PurchaseOffer(models.Model, OfferMixin):
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     status = models.CharField(max_length=7, choices=STATUSES, default='opened')
-
     datetime_created = models.DateTimeField(auto_now_add=True)
 
     user = models.ForeignKey(
@@ -46,7 +45,6 @@ class SaleOffer(models.Model, OfferMixin):
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     status = models.CharField(max_length=7, choices=STATUSES, default='opened')
-
     datetime_created = models.DateTimeField(auto_now_add=True)
 
     user = models.ForeignKey(

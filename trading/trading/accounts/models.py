@@ -3,9 +3,7 @@ from django.db import models
 
 
 class Account(models.Model):
-
     money = models.PositiveIntegerField(default=0)
-
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

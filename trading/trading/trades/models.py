@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.db.models.signals import pre_save
 
@@ -19,7 +20,6 @@ class Trade(models.Model):
     purchase_quantity_after_trade = models.PositiveIntegerField(blank=True, null=True, default=0)
     sale_quantity_before_trade = models.PositiveIntegerField(blank=True, null=True, default=0)
     sale_quantity_after_trade = models.PositiveIntegerField(blank=True, null=True, default=0)
-
     status = models.CharField(max_length=6, choices=STATUSES, default='opened')
 
     def __str__(self):
@@ -28,4 +28,4 @@ class Trade(models.Model):
     class Meta:
         unique_together = ['sale_offer', 'purchase_offer']
 
-pre_save.connect(perform_trade_presave, sender=Trade, dispatch_uid="trading.trades.models.Trade.id")
+pre_save.connect(perform_trade_presave, sender=Trade)
