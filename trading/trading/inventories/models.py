@@ -8,7 +8,6 @@ from trading.items.models import Currency
 class InventoryItem(models.Model):
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
-
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -20,7 +19,6 @@ class InventoryItem(models.Model):
 
 class Inventory(models.Model):
     inventory_items = models.ManyToManyField(InventoryItem, blank=True)
-
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -30,13 +28,11 @@ class Inventory(models.Model):
         return f'inventory {self.user.username}'
 
     def add_item_quantity(self, currency, quantity, user):
-
         item = InventoryItem.objects.get_or_create(currency=currency, user=user)[0]
         item.quantity += quantity
         item.save()
 
     def remove_item_quantity(self, currency, quantity, user):
-
         item = InventoryItem.objects.get(currency__code=currency, user=user)
         item.quantity -= quantity
         item.save()

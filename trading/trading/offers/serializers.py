@@ -1,15 +1,13 @@
 from rest_framework import serializers
 
-from .models import (SaleOffer,
-                     PurchaseOffer,
-                     )
+from trading.offers.models import SaleOffer, PurchaseOffer
 
 
 class PurchaseOfferSerializer(serializers.ModelSerializer):
     class Meta:
         model = PurchaseOffer
         fields = ['currency', 'quantity', 'price',
-                  'status', 'user']
+                  'status', 'user', 'id']
 
     def validate(self, data):
         full_price = data['price'] * data['quantity']
@@ -24,7 +22,7 @@ class SaleOfferSerializer(serializers.ModelSerializer):
         model = SaleOffer
         fields = ['inventory_item', 'suitable_offers',
                   'quantity', 'price', 'user',
-                  'status',
+                  'status', 'id'
                   ]
 
     def validate(self, data):

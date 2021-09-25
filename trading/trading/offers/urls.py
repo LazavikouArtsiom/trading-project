@@ -3,26 +3,23 @@ from django.urls import path
 from django.conf import settings
 from rest_framework import routers
 
-from .viewsets import (SaleOfferViewSet,
+from trading.offers.viewsets import (SaleOfferViewSet,
                        PurchaseOfferViewSet,
+                       MySaleOfferViewSet,
+                       MyPurchaseOfferViewSet,
                       )
 
+
 router = routers.SimpleRouter()
+user_router = routers.SimpleRouter()
 
 router.register(r'sale', SaleOfferViewSet, basename='offers_sale')
-#offers/sale
-#offers/sale/id/
-#offers/sale/id/buy
 router.register(r'purchase', PurchaseOfferViewSet, basename='offers_purchase')
-#offers/purchase
-#offers/purchase/id
-#offers/purchase/id/sale
+
+user_router.register(r'purchase', MyPurchaseOfferViewSet, basename='user_offers_purchase')
+user_router.register(r'sale', MySaleOfferViewSet, basename='user_offers_purchase')
 
 
-urlpatterns = [
-    #offers/my
-    #offers/my/purchase
-    #offers/my/purchase/id
-    #offers/my/sale
-    #offers/my/sale/id
-] + router.urls
+user_urlpatterns = user_router.urls
+
+urlpatterns = router.urls

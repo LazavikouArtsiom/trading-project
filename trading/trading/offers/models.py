@@ -12,7 +12,7 @@ STATUSES = (
 )
 
 
-class Offer:
+class OfferMixin:
 
     def remove_quantity(self, quantity):
         self.quantity -= quantity
@@ -23,12 +23,11 @@ class Offer:
         self.save()
 
 
-class PurchaseOffer(models.Model, Offer):
+class PurchaseOffer(models.Model, OfferMixin):
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     status = models.CharField(max_length=7, choices=STATUSES, default='opened')
-
     datetime_created = models.DateTimeField(auto_now_add=True)
 
     user = models.ForeignKey(
@@ -40,13 +39,12 @@ class PurchaseOffer(models.Model, Offer):
         return f'Purchase offer {self.user} {self.currency} {self.quantity} {self.price}'
 
 
-class SaleOffer(models.Model, Offer):
+class SaleOffer(models.Model, OfferMixin):
     inventory_item = models.ForeignKey(InventoryItem, on_delete=models.CASCADE)
     suitable_offers = models.ManyToManyField(PurchaseOffer, blank=True)
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     status = models.CharField(max_length=7, choices=STATUSES, default='opened')
-
     datetime_created = models.DateTimeField(auto_now_add=True)
 
     user = models.ForeignKey(

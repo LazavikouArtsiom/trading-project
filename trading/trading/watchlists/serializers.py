@@ -1,13 +1,15 @@
 from rest_framework import serializers
 
-from .models import (Watchlist,
-                    )
+from trading.watchlists.models import Watchlist
+from trading.items.serializers import CurrencySerializer
 
 
 class WatchlistSerializer(serializers.ModelSerializer):
+    currencies = CurrencySerializer(many=True)
 
     class Meta:
         model = Watchlist
-        fields = "__all__"
+        fields = ['currencies']
+
 
 

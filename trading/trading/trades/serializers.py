@@ -1,11 +1,9 @@
 from rest_framework import serializers
 
-from .models import (Trade,
-                    )
+from trading.trades.models import Trade
 
 
 class TradeSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Trade
         fields = ['status', 'sale_offer', 'purchase_offer',
@@ -15,7 +13,6 @@ class TradeSerializer(serializers.ModelSerializer):
                   'sale_quantity_after_trade',
                   ]
 
-
     def validate(self, data):
         sale_offer = data['sale_offer'] 
         purchase_offer = data['purchase_offer'] 
@@ -24,5 +21,3 @@ class TradeSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Sale offer user can't be the same as purchase offer user")
 
         return data
-
-
