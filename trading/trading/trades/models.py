@@ -15,7 +15,7 @@ class Trade(models.Model):
     sale_offer = models.ForeignKey(SaleOffer, on_delete=models.CASCADE)
     purchase_offer = models.ForeignKey(PurchaseOffer, on_delete=models.CASCADE)
 
-    purchase_quantity_before_trade = models.PositiveIntegerField(blank=True, null=True, default=0)
+    purchase_quantity_before_trade = models.PositiveIntegerField(blank=True, null=True, default=0)  # fields 18-21 could be moved into some Log class
     purchase_quantity_after_trade = models.PositiveIntegerField(blank=True, null=True, default=0)
     sale_quantity_before_trade = models.PositiveIntegerField(blank=True, null=True, default=0)
     sale_quantity_after_trade = models.PositiveIntegerField(blank=True, null=True, default=0)
